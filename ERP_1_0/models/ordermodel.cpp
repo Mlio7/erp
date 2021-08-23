@@ -3,6 +3,7 @@
 namespace erp {
     namespace models {
         OrderModel::OrderModel(std::shared_ptr<SQLModel> sql_model) :
+            QObject(),
             sql_model_{sql_model} {
 
         }
@@ -13,7 +14,7 @@ namespace erp {
             if (!sql_model_->IsLoggedIn()) return {};
 
             QVector<Order> orders;
-            auto query = sql_model_->Request("SELECT CompanyName,Quantity,CreatedOn FROM tbl_Order");
+            auto query = sql_model_->Request("SELECT CompanyName,Manager,CreatedOn FROM [ERP].[dbo].[tbl_Order]");
             while (query->next()) {
                 // Fill order info
                 // TODO : store more data about an order
@@ -34,8 +35,10 @@ namespace erp {
             if (!sql_model_->IsLoggedIn()) return false;
 
             auto query = sql_model_->Request("INSERT INTO tbl_Order(Manager,CompanyName) "
-                                             "VALUES(" + value.manager + ","
-                                             + value.company + ")");
+                                             "VALUES(\'" + value.manager + "\',\'"
+                                             + value.company + "\')");
+
+            //if (query) emit DatabaseUpdated();
             return (query) ? query->isValid() : false;
         }
 

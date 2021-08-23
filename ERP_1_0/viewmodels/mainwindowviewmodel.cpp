@@ -6,7 +6,7 @@ namespace erp {
             // Create an SQL model
             SetSQLModel(std::make_shared<SQLModel>());
 
-            // Set the default visibility
+            // Set the default visibility  Вимикаємо головне вікно
             SetVisibility(false);
         }
 
@@ -14,22 +14,28 @@ namespace erp {
             if (!GetVisibility() || !value) {
                 // TODO : create a dialog with info that the login is expired
             }
-
+            // Встановлюємо видемість головного вікна
             SetVisibility(value);
         }
 
         void MainWindowViewModel::ConnectSQLModel(
-                std::shared_ptr<SQLModel> view) noexcept {
-            connect(view.get(),
+                std::shared_ptr<SQLModel> model) noexcept {
+            // Sanity check
+            if (!model) return;
+
+            connect(model.get(),
                     &SQLModel::LoginStateChanged,
                     this,
                     &MainWindowViewModel::OnLoginStateChanged);
         }
 
         void MainWindowViewModel::DisconnectSQLModel(
-                std::shared_ptr<SQLModel> view) noexcept {
+                std::shared_ptr<SQLModel> model) noexcept {
+            // Sanity check
+            if (!model) return;
+
             // Disconnect previous model
-            disconnect(view.get(),
+            disconnect(model.get(),
                     &SQLModel::LoginStateChanged,
                     this,
                     &MainWindowViewModel::OnLoginStateChanged);

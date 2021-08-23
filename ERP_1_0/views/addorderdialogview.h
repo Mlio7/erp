@@ -26,13 +26,13 @@ namespace erp {
         public:
             std::shared_ptr<AddOrderDialogViewModel> GetViewModel() const noexcept;
 
-        signals:
-            void DatabaseUpdated();
+        public slots:
+            void OnSQLModelChanged();
 
         private slots:
             void on_addRecordButton_clicked();
-            void on_managerComboBox_currentIndexChanged(unsigned int value);
-            void on_companyComboBox_currentIndexChanged(unsigned int value);
+            void OnManagerIndexChanged(unsigned int value);
+            void OnCompanyIndexChanged(unsigned int value);
 
         protected:
             void Init() const noexcept;

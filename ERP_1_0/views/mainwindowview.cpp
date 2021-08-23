@@ -58,7 +58,12 @@ namespace erp {
         }
 
         void MainWindowView::on_actionCompanies_triggered() {
-            //ui_->tabWidget->addTab(new Company,"Companies");
+            // FIXME : this doesn't work with smart pointers
+            auto companies_widget = new CompanyWidgetView();
+            companies_widget->GetViewModel()->SetSQLModel(view_model_->GetSQLModel());
+
+            // Add a new tab to the window
+            ui_->tabWidget->addTab(companies_widget, "Companies");
         }
     } // naespace views
 } // namespace erp

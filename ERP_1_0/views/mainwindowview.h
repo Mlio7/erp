@@ -6,7 +6,7 @@
 #include "views/loginwindowview.h"
 #include "views/addorderdialogview.h"
 #include "views/orderwidgetview.h"
-
+#include "views/companywidgetview.h"
 #include "viewmodels/mainwindowviewmodel.h"
 
 namespace erp {
@@ -21,7 +21,7 @@ namespace erp {
             Q_OBJECT
 
         public:
-            MainWindowView(QMainWindow* parent = nullptr);
+            explicit MainWindowView(QMainWindow* parent = nullptr);
 
         public:
             std::shared_ptr<MainWindowViewModel> GetViewModel() const noexcept;

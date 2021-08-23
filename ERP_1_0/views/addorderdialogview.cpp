@@ -7,6 +7,27 @@ namespace erp {
             view_model_{std::make_shared<AddOrderDialogViewModel>()},
             ui_{std::make_unique<Ui::AddOrderDialog>()} {
             ui_->setupUi(this);
+
+            // Connect the view components
+            connect(ui_->managerComboBox,
+                    &QComboBox::currentIndexChanged,
+                    this,
+                    &AddOrderDialogView::OnManagerIndexChanged);
+            connect(ui_->companyComboBox,
+                    &QComboBox::currentIndexChanged,
+                    this,
+                    &AddOrderDialogView::OnCompanyIndexChanged);
+
+            // Connect the viewmodel
+            connect(view_model_.get(),
+                    &AddOrderDialogViewModel::SQLModelChanged,
+                    this,
+                    &AddOrderDialogView::OnSQLModelChanged);
+        }
+
+        void AddOrderDialogView::OnSQLModelChanged() {
+            SetManagers(view_model_->GetManagers());
+            SetCompanies(view_model_->GetCompanies());
         }
 
         std::shared_ptr<AddOrderDialogView::AddOrderDialogViewModel>
@@ -40,16 +61,14 @@ namespace erp {
             if (!view_model_->AddOrder(order)) {
                 return;
             }
-
-            emit DatabaseUpdated();
         }
 
-        void AddOrderDialogView::on_managerComboBox_currentIndexChanged(
+        void AddOrderDialogView::OnManagerIndexChanged(
                 unsigned int value) {
             manager_index_ = value;
         }
 
-        void AddOrderDialogView::on_companyComboBox_currentIndexChanged(
+        void AddOrderDialogView::OnCompanyIndexChanged(
                 unsigned int value) {
             company_index_ = value;
         }

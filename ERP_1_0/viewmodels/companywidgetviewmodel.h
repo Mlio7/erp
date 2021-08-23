@@ -1,11 +1,11 @@
-#ifndef ERP_VIEWMODELS_ORDERWIDGETVIEWMODEL_H
-#define ERP_VIEWMODELS_ORDERWIDGETVIEWMODEL_H
+#ifndef COMPANYWIDGETVIEWMODEL_H
+#define COMPANYWIDGETVIEWMODEL_H
 
 #include <QObject>
 #include <QSqlQueryModel>
 
 #include "models/sqlmodel.h"
-#include "models/ordermodel.h"
+#include "models/companymodel.h"
 
 #include "viewmodels/abstractviewmodel.h"
 
@@ -14,15 +14,15 @@ namespace erp {
         /**
          * @brief The OrderWidgetViewModel class
          */
-        class OrderWidgetViewModel : public AbstractViewModel {
+        class CompanyWidgetViewModel : public AbstractViewModel {
 
             using SQLModel = erp::models::SQLModel;
-            using OrderModel = erp::models::OrderModel;
+            using CompanyModel = erp::models::CompanyModel;
 
             Q_OBJECT
 
         public:
-            OrderWidgetViewModel();
+            CompanyWidgetViewModel();
 
         public:
             // FIXME : should be replaced
@@ -30,9 +30,6 @@ namespace erp {
 
         public slots:
             void OnDatabaseUpdated();
-
-        signals:
-            void DataRefreshed();
 
         protected:
             virtual void ConnectSQLModel(
@@ -45,8 +42,8 @@ namespace erp {
 
         private:
             // FIXME : should be used
-            std::shared_ptr<QVector<OrderModel>>
-            order_vector_{std::make_shared<QVector<OrderModel>>()};
+            std::shared_ptr<QVector<CompanyModel>>
+            order_vector_{std::make_shared<QVector<CompanyModel>>()};
 
             // FIXME : remove
             mutable std::shared_ptr<QSqlQueryModel> query_model_;
@@ -54,4 +51,4 @@ namespace erp {
     } // namespace viewodels
 } // namespace erp
 
-#endif // ERP_VIEWMODELS_ORDERWIDGETVIEWMODEL_H
+#endif // COMPANYWIDGETVIEWMODEL_H

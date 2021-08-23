@@ -1,43 +1,42 @@
-#include "orderwidgetviewmodel.h"
+#include "companywidgetviewmodel.h"
+
 
 namespace erp {
     namespace viewmodels {
-        OrderWidgetViewModel::OrderWidgetViewModel() :
+        CompanyWidgetViewModel::CompanyWidgetViewModel() :
             AbstractViewModel() {
         }
 
-        void OrderWidgetViewModel::ConnectSQLModel(
+        void CompanyWidgetViewModel::ConnectSQLModel(
                 std::shared_ptr<SQLModel> model) noexcept {
             Refresh();
         }
 
-        void OrderWidgetViewModel::DisconnectSQLModel(
+        void CompanyWidgetViewModel::DisconnectSQLModel(
                 std::shared_ptr<SQLModel> model) noexcept {
             Q_UNUSED(model)
         }
 
-        void OrderWidgetViewModel::Refresh() {
+        void CompanyWidgetViewModel::Refresh() {
             // FIXME : this code is only a temporary solution
             //         so ith should be removed later
             query_model_ = std::make_shared<QSqlQueryModel>();
-            query_model_->setQuery("SELECT CreatedOn,Manager,CompanyName FROM tbl_Order");
+            query_model_->setQuery("SELECT CreatedOn,CompanyShortName FROM tbl_Company");
 
             // Change the header
             query_model_->setHeaderData(0,Qt::Horizontal,"Дата створення");
-            query_model_->setHeaderData(1,Qt::Horizontal,"Відповідальний");
-            query_model_->setHeaderData(2,Qt::Horizontal,"Постачальник");
-
-            emit DataRefreshed();
+            query_model_->setHeaderData(2,Qt::Horizontal,"Контрагент");
         }
 
         // FIXME : temporary code
         std::shared_ptr<QSqlQueryModel>
-        OrderWidgetViewModel::GetTableViewModel() const {
+        CompanyWidgetViewModel::GetTableViewModel() const {
             return query_model_;
         }
 
-        void OrderWidgetViewModel::OnDatabaseUpdated() {
+        void CompanyWidgetViewModel::OnDatabaseUpdated() {
             Refresh();
         }
-    } // namespace viewodels
+
+    } // naespace views
 } // namespace erp

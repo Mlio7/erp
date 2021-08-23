@@ -1,6 +1,8 @@
 #ifndef ERP_MODELS_ORDERMODEL_H
 #define ERP_MODELS_ORDERMODEL_H
 
+#include <QObject>
+
 #include "models/sqlmodel.h"
 
 namespace erp {
@@ -9,16 +11,19 @@ namespace erp {
          * @brief The OrderModel class is used to retrieve data
          * about curent orders from the database
          */
-        class OrderModel {
+        class OrderModel : public QObject {
+
+            Q_OBJECT
+
         public:
             /**
              * @brief The Order struct
              */
             // TODO : add more info
             struct Order {
-                QString company;
-                QString manager;
                 QDateTime timestamp;
+                QString manager;
+                QString company;
             };
 
         public:
@@ -27,6 +32,11 @@ namespace erp {
         public:
             QVector<Order> GetOrders() const noexcept;
             bool AddOrder(const Order& value) const noexcept;
+
+        /*
+        signals:
+            void DatabaseUpdated() const;
+            */
 
         private:
             std::shared_ptr<SQLModel> sql_model_;

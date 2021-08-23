@@ -9,17 +9,23 @@ namespace erp {
         }
 
         void LoginWindowViewModel::ConnectSQLModel(
-                std::shared_ptr<SQLModel> view) noexcept {
-            connect(view.get(),
+                std::shared_ptr<SQLModel> model) noexcept {
+            // Sanity check
+            if (!model) return;
+
+            connect(model.get(),
                     &SQLModel::LoginStateChanged,
                     this,
                     &LoginWindowViewModel::OnLoginStateChanged);
         }
 
         void LoginWindowViewModel::DisconnectSQLModel(
-                std::shared_ptr<SQLModel> view) noexcept {
+                std::shared_ptr<SQLModel> model) noexcept {
+            // Sanity check
+            if (!model) return;
+
             // Disconnect previous model
-            disconnect(view.get(),
+            disconnect(model.get(),
                     &SQLModel::LoginStateChanged,
                     this,
                     &LoginWindowViewModel::OnLoginStateChanged);
@@ -29,13 +35,13 @@ namespace erp {
             SetVisibility(!value);
         }
 
-        void LoginWindowViewModel::Login(const LoginData& value) const noexcept {
+        void LoginWindowViewModel::Login(const LoginData& model) const noexcept {
             // Sanity check
             auto sql_model = GetSQLModel();
             if (!sql_model) return;
 
             // Login to the database
-            sql_model->Login(value);
+            sql_model->Login(model);
         }
 
         bool LoginWindowViewModel::IsLoggedIn() const noexcept {

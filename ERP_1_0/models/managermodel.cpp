@@ -7,7 +7,7 @@ namespace erp {
 
         }
 
-        QVector<ManagerModel::Manager> ManagerModel::getManagers() const noexcept {
+        QVector<ManagerModel::Manager> ManagerModel::GetManagers() const noexcept {
             // Sanity checks
             if (!sql_model_) return {};
             if (!sql_model_->IsLoggedIn()) return {};

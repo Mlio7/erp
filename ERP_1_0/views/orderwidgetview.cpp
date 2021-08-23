@@ -8,6 +8,14 @@ namespace erp {
             view_model_{std::make_shared<OrderWidgetViewModel>()} {
             // Initialize the UI
             Init();
+
+            // Connect the signals and slots
+            /*
+            connect(view_model_->GetSQLModel().get(),
+                    &erp::models::SQLModel::DatabaseUpdated,
+                    view_model_.get(),
+                    &OrderWidgetViewModel::OnDatabaseUpdated);
+                    */
         }
 
         std::shared_ptr<OrderWidgetView::OrderWidgetViewModel>
@@ -16,6 +24,12 @@ namespace erp {
         }
 
         void OrderWidgetView::Init() {
+            // Connect the model
+            connect(view_model_.get(),
+                     &OrderWidgetViewModel::SQLModelChanged,
+                     this,
+                     &OrderWidgetView::OnSQLModelChanged);
+
             // Setup the UI
             ui_->setupUi(this);
 
@@ -24,12 +38,6 @@ namespace erp {
                     &QPushButton::clicked,
                     this,
                     &OrderWidgetView::OnAddOrderButtonClicked);
-
-            // Connect the model
-            connect(view_model_.get(),
-                     &OrderWidgetViewModel::ModelUpdated,
-                     this,
-                     &OrderWidgetView::OnModelUpdated);
         }
 
         void OrderWidgetView::OnAddOrderButtonClicked() {
@@ -37,17 +45,11 @@ namespace erp {
             add_order_dialog_->GetViewModel()->SetSQLModel(
                         view_model_->GetSQLModel());
 
-            // Connect the signals and slots
-            connect(add_order_dialog_.get(),
-                    &AddOrderDialogView::DatabaseUpdated,
-                    view_model_.get(),
-                    &OrderWidgetViewModel::OnDatabaseUpdated);
-
             // Show the window
             add_order_dialog_->show();
         }
 
-        void OrderWidgetView::OnModelUpdated() {
+        void OrderWidgetView::OnSQLModelChanged() {
             // FIXME : temporary code
             auto model = view_model_->GetTableViewModel();
             if (model) ui_->contentTabView->setModel(model.get());

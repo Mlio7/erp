@@ -20,6 +20,12 @@ namespace erp {
             ui_->setupUi(this);
             ui_->passwordField->setEchoMode(QLineEdit::Password);
 
+            // FIXME : remove after testing
+            ui_->dbField->setText("ERP");
+            ui_->passwordField->setText("1");
+            ui_->serverField->setText("H-PC");
+            ui_->usernameField->setText("Test");
+
             // Connect UI to the backend
             connect(ui_->connectButton,
                     &QPushButton::clicked,
@@ -34,14 +40,10 @@ namespace erp {
 
         void LoginWindowView::OnConnectButtonClicked() {
             LoginWindowViewModel::LoginData data;
-            data.database = ui_->dbField->text();
-            data.password = ui_->passwordField->text();
-            data.server =   ui_->serverField->text();
-            data.user =     ui_->usernameField->text();
-            //data.database =  "H-PC"; //ui_->dbField->text();
-            //data.password =  "ERP";  //ui_->passwordField->text();
-            //data.server =    "test"; //ui_->serverField->text();
-            //data.user =      "1";    //ui_->usernameField->text();
+            data.database   = ui_->dbField->text();
+            data.password   = ui_->passwordField->text();
+            data.server     = ui_->serverField->text();
+            data.user       = ui_->usernameField->text();
 
             // Try to log in
             view_model_->Login(data);

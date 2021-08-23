@@ -31,13 +31,15 @@ namespace erp {
             QVector<OrderModel::Order> GetOrders() const noexcept;
             bool AddOrder(const OrderModel::Order& value) const noexcept;
 
-            QVector<CompanyModel::Company> getCompanies() const noexcept;
+            QVector<CompanyModel::Company> GetCompanies() const noexcept;
 
-            QVector<ManagerModel::Manager> getManagers() const noexcept;
+            QVector<ManagerModel::Manager> GetManagers() const noexcept;
+
+            //std::shared_ptr<OrderModel> GetOrderModel() const noexcept;
 
         protected:
-            void ConnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
-            void DisconnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
+            void ConnectSQLModel(std::shared_ptr<SQLModel> model) noexcept override;
+            void DisconnectSQLModel(std::shared_ptr<SQLModel> model) noexcept override;
 
         private:
             std::shared_ptr<OrderModel> order_model_;

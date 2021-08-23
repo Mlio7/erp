@@ -13,7 +13,7 @@ namespace erp {
             if (!sql_model_->IsLoggedIn()) return {};
 
             QVector<Company> companies;
-            auto query = sql_model_->Request("SELECT Name FROM tbl_Company");
+            auto query = sql_model_->Request("SELECT CompanyShortName FROM tbl_Company");
             while (query->next()) {
                 // Fill company info
                 // TODO : store more data about a company

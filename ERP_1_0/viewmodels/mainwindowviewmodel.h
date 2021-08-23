@@ -19,14 +19,32 @@ namespace erp {
             Q_OBJECT
 
         public:
+            /**
+             * @brief MainWindowViewModel
+             */
             MainWindowViewModel();
 
         public slots:
+            /**
+             * @brief OnLoginStateChanged
+             * @param value
+             */
             void OnLoginStateChanged(bool value);
 
         protected:
-            virtual void ConnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
-            virtual void DisconnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
+            /**
+             * @brief ConnectSQLModel
+             * @param model
+             */
+            virtual void ConnectSQLModel(
+                    std::shared_ptr<SQLModel> model) noexcept override;
+
+            /**
+             * @brief DisconnectSQLModel
+             * @param model
+             */
+            virtual void DisconnectSQLModel(
+                    std::shared_ptr<SQLModel> model) noexcept override;
         };
     } // namespace viewodels
 } // namespace erp

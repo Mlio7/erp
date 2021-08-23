@@ -25,7 +25,7 @@ namespace erp {
             explicit ManagerModel(std::shared_ptr<SQLModel> sql_model);
 
         public:
-            QVector<Manager> getManagers() const noexcept;
+            QVector<Manager> GetManagers() const noexcept;
 
         private:
             std::shared_ptr<SQLModel> sql_model_;

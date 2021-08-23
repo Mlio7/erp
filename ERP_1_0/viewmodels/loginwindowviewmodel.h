@@ -32,8 +32,10 @@ namespace erp {
             void OnLoginStateChanged(bool value);
 
         protected:
-            virtual void ConnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
-            virtual void DisconnectSQLModel(std::shared_ptr<SQLModel> view) noexcept override;
+            virtual void ConnectSQLModel(
+                    std::shared_ptr<SQLModel> model) noexcept override;
+            virtual void DisconnectSQLModel(
+                    std::shared_ptr<SQLModel> model) noexcept override;
         };
     } // namespace viewodels
 } // namespace erp

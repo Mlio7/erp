@@ -18,25 +18,32 @@ namespace erp {
         }
 
         QVector<AddOrderDialogViewModel::CompanyModel::Company>
-        AddOrderDialogViewModel::getCompanies() const noexcept {
+        AddOrderDialogViewModel::GetCompanies() const noexcept {
             return company_model_->getCompanies();
         }
 
         QVector<AddOrderDialogViewModel::ManagerModel::Manager>
-        AddOrderDialogViewModel::getManagers() const noexcept {
-            return manager_model_->getManagers();
+        AddOrderDialogViewModel::GetManagers() const noexcept {
+            return manager_model_->GetManagers();
         }
 
-        void AddOrderDialogViewModel::SetSQLModel(std::shared_ptr<SQLModel> value) {
-            // Sanity check
-            if (!value) return;
+        /*
+        std::shared_ptr<AddOrderDialogViewModel::OrderModel>
+        AddOrderDialogViewModel::GetOrderModel() const noexcept() {
 
-            order_model_ = std::make_shared<OrderModel>(value);
-            company_model_ = std::make_shared<CompanyModel>(value);
-            manager_model_ =std::make_shared<ManagerModel>(value);
+        }
+        */
+
+        void AddOrderDialogViewModel::SetSQLModel(std::shared_ptr<SQLModel> model) {
+            // Sanity check
+            if (!model) return;
+
+            order_model_ = std::make_shared<OrderModel>(model);
+            company_model_ = std::make_shared<CompanyModel>(model);
+            manager_model_ =std::make_shared<ManagerModel>(model);
 
             // Call the method from the superclass
-            WindowViewModel::SetSQLModel(value);
+            WindowViewModel::SetSQLModel(model);
         }
 
         void AddOrderDialogViewModel::ConnectSQLModel(

@@ -16,11 +16,13 @@ SOURCES += \
     models/sqlmodel.cpp \
     viewmodels/abstractviewmodel.cpp \
     viewmodels/addorderdialogviewmodel.cpp \
+    viewmodels/companywidgetviewmodel.cpp \
     viewmodels/loginwindowviewmodel.cpp \
     viewmodels/mainwindowviewmodel.cpp \
     viewmodels/orderwidgetviewmodel.cpp \
     viewmodels/windowviewmodel.cpp \
     views/addorderdialogview.cpp \
+    views/companywidgetview.cpp \
     views/loginwindowview.cpp \
     views/mainwindowview.cpp \
     views/orderwidgetview.cpp
@@ -32,17 +34,20 @@ HEADERS += \
     models/sqlmodel.h \
     viewmodels/abstractviewmodel.h \
     viewmodels/addorderdialogviewmodel.h \
+    viewmodels/companywidgetviewmodel.h \
     viewmodels/loginwindowviewmodel.h \
     viewmodels/mainwindowviewmodel.h \
     viewmodels/orderwidgetviewmodel.h \
     viewmodels/windowviewmodel.h \
     views/addorderdialogview.h \
+    views/companywidgetview.h \
     views/loginwindowview.h \
     views/mainwindowview.h \
     views/orderwidgetview.h
 
 FORMS += \
     ui/addorderdialog.ui \
+    ui/companywidget.ui \
     ui/loginwindow.ui \
     ui/mainwindow.ui \
     ui/orderwidget.ui

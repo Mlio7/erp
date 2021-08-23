@@ -31,7 +31,7 @@ namespace erp {
 
         public slots:
             void OnAddOrderButtonClicked();
-            void OnModelUpdated();
+            void OnSQLModelChanged();
 
         private:
             std::unique_ptr<Ui::OrderWidget> ui_;
