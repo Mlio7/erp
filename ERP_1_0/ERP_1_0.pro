@@ -13,6 +13,9 @@ SOURCES += \
     models/companymodel.cpp \
     models/managermodel.cpp \
     models/ordermodel.cpp \
+    models/references_delivery_statetypemodel.cpp \
+    models/references_order_billstatetypemodel.cpp \
+    models/references_order_documentstatetype.cpp \
     models/sqlmodel.cpp \
     viewmodels/abstractviewmodel.cpp \
     viewmodels/addorderdialogviewmodel.cpp \
@@ -31,6 +34,9 @@ HEADERS += \
     models/companymodel.h \
     models/managermodel.h \
     models/ordermodel.h \
+    models/references_delivery_statetypemodel.h \
+    models/references_order_billstatetypemodel.h \
+    models/references_order_documentstatetype.h \
     models/sqlmodel.h \
     viewmodels/abstractviewmodel.h \
     viewmodels/addorderdialogviewmodel.h \

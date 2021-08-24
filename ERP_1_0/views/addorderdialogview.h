@@ -17,7 +17,9 @@ namespace erp {
             using OrderModel = erp::models::OrderModel;
             using CompanyModel = erp::models::CompanyModel;
             using ManagerModel = erp::models::ManagerModel;
-
+            using REFERENCES_ORDER_DocumentStateTypeModel = erp::models::REFERENCES_ORDER_DocumentStateTypeModel;
+            using REFERENCES_ORDER_BillStateTypeModel = erp::models::REFERENCES_ORDER_BillStateTypeModel;
+            using REFERENCES_DELIVERY_StateTypeModel = erp::models::REFERENCES_DELIVERY_StateTypeModel;
             Q_OBJECT
 
         public:
@@ -31,19 +33,25 @@ namespace erp {
 
         private slots:
             void on_addRecordButton_clicked();
+            //combo box
             void OnManagerIndexChanged(unsigned int value);
             void OnCompanyIndexChanged(unsigned int value);
+            void OnDocumentStateIndexChanged(unsigned int value);
+            void OnBillStateIndexChanged(unsigned int value);
 
         protected:
             void Init() const noexcept;
 
             void SetManagers(QVector<ManagerModel::Manager> value);
             void SetCompanies(QVector<CompanyModel::Company> value);
+            void SetDocumentState(QVector<REFERENCES_ORDER_DocumentStateTypeModel::DocumentStateType> value);
+            void SetBillState(QVector<REFERENCES_ORDER_BillStateTypeModel::BillStateType> value);
 
         private:
             unsigned int manager_index_{0};
             unsigned int company_index_{0};
-
+            unsigned int documentstate_index_{0};
+            unsigned int billstate_index_{0};
             std::shared_ptr<AddOrderDialogViewModel> view_model_;
             std::unique_ptr<Ui::AddOrderDialog> ui_;
         };

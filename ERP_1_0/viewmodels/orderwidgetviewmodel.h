@@ -29,7 +29,7 @@ namespace erp {
             std::shared_ptr<QSqlQueryModel> GetTableViewModel() const;
 
         public slots:
-            void OnDatabaseUpdated();
+            void OnOrdersUpdated();
 
         signals:
             void DataRefreshed();

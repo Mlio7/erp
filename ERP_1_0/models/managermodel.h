@@ -17,8 +17,8 @@ namespace erp {
             // TODO : add more info
             struct Manager {
                 QString name;
-                QString surname;
-                uint8_t age;
+
+
             };
 
         public:

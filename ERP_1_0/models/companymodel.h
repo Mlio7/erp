@@ -16,7 +16,28 @@ namespace erp {
              */
             // TODO : add more info
             struct Company {
-                QString name;
+                //QString name;
+                QDateTime timestamp;
+                QString manager;
+                QString CompanyShortName;
+                QString ContactName;
+                QString Relationship;
+                QString Field;
+                QString FieldActivity;
+                QString ActivityDirection;
+                QString AddressType;
+                QString Continent;
+                QString Country;
+                //QString State;
+                //QString City;
+                QString Communication_CellNumber;
+                QString Communication_PhoneNumber;
+                QString Communication_FaxNumber;
+                QString Communication_Email;
+                QString Communication_Web;
+                qint32 SumVAT;
+                QString BillState;
+                QString DeliveryState;
             };
 
         public:
@@ -24,6 +45,7 @@ namespace erp {
 
         public:
             QVector<Company> getCompanies() const noexcept;
+            QVector<Company> getManagerCompanies(const QString& manager) const noexcept;
 
         private:
             std::shared_ptr<SQLModel> sql_model_;

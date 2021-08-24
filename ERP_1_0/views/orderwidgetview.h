@@ -7,7 +7,11 @@
 
 #include "viewmodels/orderwidgetviewmodel.h"
 
-#include "ui_orderwidget.h"
+QT_BEGIN_NAMESPACE
+namespace Ui {
+    class OrderWidget;
+}
+QT_END_NAMESPACE
 
 namespace erp {
     namespace views {
@@ -31,7 +35,11 @@ namespace erp {
 
         public slots:
             void OnAddOrderButtonClicked();
+            void OnDataRefreshed();
             void OnSQLModelChanged();
+
+        protected:
+            void updateContent();
 
         private:
             std::unique_ptr<Ui::OrderWidget> ui_;

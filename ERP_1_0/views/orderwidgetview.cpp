@@ -1,5 +1,7 @@
 #include "orderwidgetview.h"
 
+#include "ui_orderwidget.h"
+
 namespace erp {
     namespace views {
         OrderWidgetView::OrderWidgetView(QWidget *parent) :
@@ -29,6 +31,10 @@ namespace erp {
                      &OrderWidgetViewModel::SQLModelChanged,
                      this,
                      &OrderWidgetView::OnSQLModelChanged);
+            connect(view_model_.get(),
+                     &OrderWidgetViewModel::DataRefreshed,
+                     this,
+                     &OrderWidgetView::OnDataRefreshed);
 
             // Setup the UI
             ui_->setupUi(this);
@@ -45,11 +51,26 @@ namespace erp {
             add_order_dialog_->GetViewModel()->SetSQLModel(
                         view_model_->GetSQLModel());
 
+            // Connect to the database updates
+            auto order_model = add_order_dialog_->GetViewModel()->GetOrderModel();
+            connect(order_model.get(),
+                    &erp::models::OrderModel::OrdersUpdated,
+                    view_model_.get(),
+                    &OrderWidgetViewModel::OnOrdersUpdated);
+
             // Show the window
             add_order_dialog_->show();
         }
 
+        void OrderWidgetView::OnDataRefreshed() {
+            updateContent();
+        }
+
         void OrderWidgetView::OnSQLModelChanged() {
+            updateContent();
+        }
+
+        void OrderWidgetView::updateContent() {
             // FIXME : temporary code
             auto model = view_model_->GetTableViewModel();
             if (model) ui_->contentTabView->setModel(model.get());

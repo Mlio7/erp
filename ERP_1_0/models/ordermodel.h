@@ -19,11 +19,16 @@ namespace erp {
             /**
              * @brief The Order struct
              */
-            // TODO : add more info
             struct Order {
                 QDateTime timestamp;
+                QString InvoiceNumber;
                 QString manager;
                 QString company;
+                QString DocumentState;
+                qint32  SumNoVAT;
+                qint32  SumVAT;
+                QString BillState;
+                QString DeliveryState;
             };
 
         public:
@@ -33,10 +38,8 @@ namespace erp {
             QVector<Order> GetOrders() const noexcept;
             bool AddOrder(const Order& value) const noexcept;
 
-        /*
         signals:
-            void DatabaseUpdated() const;
-            */
+            void OrdersUpdated() const;
 
         private:
             std::shared_ptr<SQLModel> sql_model_;
