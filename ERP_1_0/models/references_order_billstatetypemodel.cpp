@@ -1,6 +1,5 @@
 #include "references_order_billstatetypemodel.h"
 
-
 namespace erp {
     namespace models {
 

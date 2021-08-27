@@ -17,28 +17,24 @@ namespace erp {
         }
 
         void OrderWidgetViewModel::Refresh() {
-            // FIXME : this code is only a temporary solution
-            //         so ith should be removed later
             query_model_ = std::make_shared<QSqlQueryModel>();
             //RAW SELECT
-            //query_model_->setQuery("SELECT CreatedOn,InvoiceNumber,ResponsibleUserID,CompanyID,"
-            //                            "OrderDocumentStateTypeID,SumNoVAT,SumVAT,"
-            //                            "OrderBillStateTypeID,DeliveryStateTypeID FROM [ERP].[dbo].[tbl_Order]");
-
-            // Change the header
-            //query_model_->setHeaderData(0,Qt::Horizontal,"Дата створення");
-            //query_model_->setHeaderData(1,Qt::Horizontal,"№ Замовлення");
-            //query_model_->setHeaderData(2,Qt::Horizontal,"Відповідальний");
-            //query_model_->setHeaderData(3,Qt::Horizontal,"Контрагент");
-            //query_model_->setHeaderData(4,Qt::Horizontal,"Документ");
-            //query_model_->setHeaderData(5,Qt::Horizontal,"Сума без ПДВ");
-            //query_model_->setHeaderData(6,Qt::Horizontal,"Сума з ПДВ");
-            //query_model_->setHeaderData(7,Qt::Horizontal,"Стан оплати");
-            //query_model_->setHeaderData(8,Qt::Horizontal,"Стан відгрузки");
-            //VIEW SELECT
-            query_model_->setQuery("SELECT CreatedOn,InvoiceNumber,ResponsibleUser,Company,"
-                                        "DocumentState,SumNoVAT,SumVAT,"
-                                        "BillState,DeliveryState FROM [ERP].[dbo].[vw_Order]");
+            query_model_->setQuery("select [tbl_Order].[CreatedOn],\
+                            [tbl_Order].[InvoiceNumber],\
+                            [tbl_Users].[Name],\
+                            [tbl_Company].[CompanyShortName],\
+                            [tbl_REFERENCES_ORDER_DocumentStateType].[Name],\
+                            [tbl_Order].[SumNoVAT],\
+                            [tbl_Order].[SumVAT],\
+                            [tbl_REFERENCES_ORDER_BillStateType].[Name],\
+                            [tbl_REFERENCES_DELIVERY_StateType].[Name]\
+                            from [ERP].[dbo].[tbl_Order]\
+                            full join  [dbo].[tbl_Company] on  [dbo].[tbl_Order].[CompanyID] = [dbo].[tbl_Company].[ID]\
+                             join  [dbo].[tbl_Users] on  [dbo].[tbl_Order].[ResponsibleUserID] = [dbo].[tbl_Users].[ID]\
+                             join  [dbo].[tbl_REFERENCES_ORDER_DocumentStateType] on  [dbo].[tbl_Order].[OrderDocumentStateTypeID] = [dbo].[tbl_REFERENCES_ORDER_DocumentStateType].[ID]\
+                             join  [dbo].[tbl_REFERENCES_ORDER_BillStateType] on  [dbo].[tbl_Order].[OrderBillStateTypeID] = [dbo].[tbl_REFERENCES_ORDER_BillStateType].[ID]\
+                            full join  [dbo].[tbl_REFERENCES_DELIVERY_StateType] on  [dbo].[tbl_Order].[DeliveryStateTypeID] = [dbo].[tbl_REFERENCES_DELIVERY_StateType].[ID] ORDER BY [tbl_Order].[CreatedOn]\
+");
 
             query_model_->setHeaderData(0,Qt::Horizontal,"Дата створення");
             query_model_->setHeaderData(1,Qt::Horizontal,"№ Замовлення");

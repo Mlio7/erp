@@ -13,12 +13,10 @@ namespace erp {
                     &QComboBox::currentIndexChanged,
                     this,
                     &AddOrderDialogView::OnManagerIndexChanged);
-
             connect(ui_->companyComboBox,
                     &QComboBox::currentIndexChanged,
                     this,
                     &AddOrderDialogView::OnCompanyIndexChanged);
-
             connect(ui_->DocumentStateComboBox,
                     &QComboBox::currentIndexChanged,
                     this,
@@ -27,21 +25,24 @@ namespace erp {
                     &QComboBox::currentIndexChanged,
                     this,
                     &AddOrderDialogView::OnBillStateIndexChanged);
-            //connect(ui_->DocumentStateComboBox,
-            //        &QComboBox::currentIndexChanged,
-            //         this,
-            //        &AddOrderDialogView::OnDocumentStateIndexChanged);
+
+            connect(ui_->DeliveryStateComboBox,
+                    &QComboBox::currentIndexChanged,
+                    this,
+                    &AddOrderDialogView::OnDeliveryStateIndexChanged);
+
+
             // Connect the viewmodel
             connect(view_model_.get(),
                     &AddOrderDialogViewModel::SQLModelChanged,
                     this,
                     &AddOrderDialogView::OnSQLModelChanged);
         }
-        //ПІДКЛЮЧИТИ кінцевий вивід
+//ПІДКЛЮЧИТИ кінцевий вивід=========================================================================
         void AddOrderDialogView::OnSQLModelChanged() {
             SetDocumentState(view_model_->GetDocumentStateTypes());
             SetBillState(view_model_->GetBillStateTypes());
-
+            SetDeliveryState(view_model_->GetDeliveryStateTypes());
             auto managers = view_model_->GetManagers();
             SetManagers(managers);
 
@@ -64,8 +65,6 @@ namespace erp {
 
             for (const auto& manager : value) {
                 ui_->managerComboBox->addItem(manager.name);
-
-
             }
         }
 
@@ -76,7 +75,7 @@ namespace erp {
             // Clear the previous combo box data
             ui_->companyComboBox->clear();
 
-            // Add values to the combobox
+            // Add values to the c
             for (const auto& company : value) {
                 ui_->companyComboBox->addItem(company.CompanyShortName);
             }
@@ -99,6 +98,15 @@ namespace erp {
                 ui_->BillStateComboBox->addItem(billstate.name);
             }
         }
+
+        void AddOrderDialogView::SetDeliveryState(QVector<models::REFERENCES_DELIVERY_StateTypeModel::DELIVERY_StateType> value){
+            // Sanity check
+            if (value.isEmpty()) return;
+
+            for (const auto& deliverystate : value) {
+                ui_->DeliveryStateComboBox->addItem(deliverystate.name);
+            }
+        }
         //Забір даних з інтерфейсу  для збереження
         void AddOrderDialogView::on_addRecordButton_clicked() {
             OrderModel::Order order;
@@ -107,7 +115,7 @@ namespace erp {
             order.manager       = ui_->managerComboBox->itemText(manager_index_);
             order.DocumentState = ui_->DocumentStateComboBox->itemText(documentstate_index_);
             order.BillState     = ui_->BillStateComboBox->itemText(billstate_index_);
-
+            order.DeliveryState = ui_->DeliveryStateComboBox->itemText(deliverystate_index_);
             if (!view_model_->AddOrder(order)) {
                 // TODO : crate a dialog with failure data
             }
@@ -130,16 +138,17 @@ namespace erp {
             }
         }
 
-        void AddOrderDialogView::OnCompanyIndexChanged(
-                unsigned int value) {
+        void AddOrderDialogView::OnCompanyIndexChanged(unsigned int value) {
             company_index_ = value;
         }
-
         void AddOrderDialogView::OnDocumentStateIndexChanged(unsigned int value){
             documentstate_index_ = value;
         }
         void AddOrderDialogView::OnBillStateIndexChanged(unsigned int value){
             billstate_index_ = value;
+        }
+        void AddOrderDialogView::OnDeliveryStateIndexChanged(unsigned int value)        {
+            deliverystate_index_ = value;
         }
     } // namespace views
 } // namespace erp

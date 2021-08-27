@@ -33,27 +33,25 @@ namespace erp {
         public:
             void SetSQLModel(std::shared_ptr<SQLModel> value);
 
-            QVector<OrderModel::Order> GetOrders() const noexcept;
-            QVector<OrderModel::Order> GetOrderNo() const noexcept;
-            bool AddOrder(const OrderModel::Order& value) const noexcept;
-
-            QVector<CompanyModel::Company> GetCompanies() const noexcept;
-            QVector<CompanyModel::Company> GetManagerCompanies(const QString& manager) const noexcept;
-            QVector<ManagerModel::Manager> GetManagers() const noexcept;
+            QVector<OrderModel::Order>                                          GetOrders() const noexcept;
+            QVector<OrderModel::Order>                                          GetOrderNo() const noexcept;
+            QVector<CompanyModel::Company>                                      GetCompanies() const noexcept;
+            QVector<CompanyModel::Company>                                      GetManagerCompanies(const QString& manager) const noexcept;
+            QVector<ManagerModel::Manager>                                      GetManagers() const noexcept;
             QVector<REFERENCES_ORDER_DocumentStateTypeModel::DocumentStateType> GetDocumentStateTypes() const noexcept;
-            QVector<REFERENCES_ORDER_BillStateTypeModel::BillStateType> GetBillStateTypes() const noexcept;
-            QVector<REFERENCES_DELIVERY_StateTypeModel::DELIVERY_StateType> GetDeliveryStateTypes() const noexcept;
+            QVector<REFERENCES_ORDER_BillStateTypeModel::BillStateType>         GetBillStateTypes() const noexcept;
+            QVector<REFERENCES_DELIVERY_StateTypeModel::DELIVERY_StateType>     GetDeliveryStateTypes() const noexcept;
             std::shared_ptr<OrderModel> GetOrderModel() const noexcept;
-
+            bool AddOrder(const OrderModel::Order& value) const noexcept;
         protected:
             void ConnectSQLModel(std::shared_ptr<SQLModel> model) noexcept override;
             void DisconnectSQLModel(std::shared_ptr<SQLModel> model) noexcept override;
 
         private:
             //Індекси вибору
-            std::shared_ptr<OrderModel> order_model_;
-            std::shared_ptr<CompanyModel> company_model_;
-            std::shared_ptr<ManagerModel> manager_model_;
+            std::shared_ptr<OrderModel>                              order_model_;
+            std::shared_ptr<CompanyModel>                            company_model_;
+            std::shared_ptr<ManagerModel>                            manager_model_;
             std::shared_ptr<REFERENCES_ORDER_DocumentStateTypeModel> documentstatetypemodel_model_;
             std::shared_ptr<REFERENCES_ORDER_BillStateTypeModel>     billstatetypemodel_model_;
             std::shared_ptr<REFERENCES_DELIVERY_StateTypeModel>      deliverystatetypemodel_model_;

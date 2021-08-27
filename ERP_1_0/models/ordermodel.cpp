@@ -43,10 +43,6 @@ namespace erp {
             // Sanity checks
             if (!sql_model_) return false;
             if (!sql_model_->IsLoggedIn()) return false;
-
-           // auto query = sql_model_->Request("INSERT INTO tbl_Order(Manager,CompanyName) "
-           //                                  "VALUES(\'" + value.manager + "\',\'"
-           //                                  + value.company + "\')");
             auto query = sql_model_->Request("INSERT INTO [dbo].[tbl_Order]"
            "([ID]"
            ",[CreatedOn]"
@@ -67,14 +63,15 @@ namespace erp {
            "default,"
            "default,"
            "default,"
+// FIXME :
            "\'" + value.InvoiceNumber + "\',"
            "(select [ID] from [dbo].[tbl_Users] where Name = \'"+value.manager+"\'),"
            "(select [ID] from [dbo].[tbl_Company] where [CompanyShortName] = \'"+value.company+"\'),"
            "(select [ID] from [dbo].[tbl_REFERENCES_ORDER_DocumentStateType] where [Name] = \'"+value.DocumentState+"\'),"
            "\' \',"
            "\' \',"
-           "(select [ID] from [dbo].[tbl_REFERENCES_ORDER_BillStateType] where [Name] = \'"+value.BillState+"\'),"
-           "(select [ID] from [dbo].[tbl_REFERENCES_DELIVERY_StateType] where [Name] = \'Відправлено\'))"
+           "(select [ID] from [dbo].[tbl_REFERENCES_ORDER_BillStateType] where [Name] = \'"+value.BillState    +"\'),"
+           "(select [ID] from [dbo].[tbl_REFERENCES_DELIVERY_StateType] where [Name]  = \'"+value.DeliveryState+"\'))"
 );
 
             OrderModel::GetOrders();

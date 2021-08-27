@@ -38,20 +38,21 @@ namespace erp {
             void OnCompanyIndexChanged(unsigned int value);
             void OnDocumentStateIndexChanged(unsigned int value);
             void OnBillStateIndexChanged(unsigned int value);
-
+            void OnDeliveryStateIndexChanged(unsigned int value);
         protected:
             void Init() const noexcept;
 
-            void SetManagers(QVector<ManagerModel::Manager> value);
-            void SetCompanies(QVector<CompanyModel::Company> value);
+            void SetManagers(QVector     <ManagerModel::Manager> value);
+            void SetCompanies(QVector    <CompanyModel::Company> value);
             void SetDocumentState(QVector<REFERENCES_ORDER_DocumentStateTypeModel::DocumentStateType> value);
-            void SetBillState(QVector<REFERENCES_ORDER_BillStateTypeModel::BillStateType> value);
-
+            void SetBillState(QVector    <REFERENCES_ORDER_BillStateTypeModel::BillStateType> value);
+            void SetDeliveryState(QVector<REFERENCES_DELIVERY_StateTypeModel::DELIVERY_StateType> value);
         private:
             unsigned int manager_index_{0};
             unsigned int company_index_{0};
             unsigned int documentstate_index_{0};
             unsigned int billstate_index_{0};
+            unsigned int deliverystate_index_{0};
             std::shared_ptr<AddOrderDialogViewModel> view_model_;
             std::unique_ptr<Ui::AddOrderDialog> ui_;
         };
