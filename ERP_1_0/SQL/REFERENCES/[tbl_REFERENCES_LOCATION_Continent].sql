@@ -1,0 +1,177 @@
+----USE [ERP]
+----GO
+
+----/****** Object:  Table [dbo].[tbl_REFERENCES_LOCATION_Continent]    Script Date: 20.08.2021 1:31:54 ******/
+----SET ANSI_NULLS ON
+----GO
+
+----SET QUOTED_IDENTIFIER ON
+----GO
+
+----CREATE TABLE [dbo].[tbl_REFERENCES_LOCATION_Continent](
+----	[ID] [uniqueidentifier] ROWGUIDCOL  NOT NULL,
+----	[CreatedOn] [datetime] NULL,
+----	[CreatedByID] [uniqueidentifier] NULL,
+----	[ModifiedOn] [datetime] NULL,
+----	[ModifiedByID] [uniqueidentifier] NULL,
+----	[Name] [nvarchar](250) NOT NULL,
+----	[Description] [nvarchar](250) NULL,
+----)
+
+
+----ALTER TABLE [dbo].[tbl_REFERENCES_LOCATION_Continent] 
+----ADD  CONSTRAINT [PDFContinentID]  
+----DEFAULT (newid()) FOR [ID]
+----GO
+
+----ALTER TABLE [dbo].[tbl_REFERENCES_LOCATION_Continent] 
+----ADD  CONSTRAINT [DF_tbl_Continent_CreatedOn]  
+----DEFAULT (getdate()) FOR [CreatedOn]
+----GO
+------1. PRIMARY KEY 
+----Alter table [tbl_REFERENCES_LOCATION_Continent]
+----ADD CONSTRAINT PK_tbl_Continent_ID
+----PRIMARY KEY ([ID])
+----GO
+
+
+----CREATE TRIGGER trg_Continent_ModifiedOn
+----ON [dbo].[tbl_REFERENCES_LOCATION_Continent]
+----AFTER UPDATE
+----AS
+----UPDATE [dbo].[tbl_REFERENCES_LOCATION_Continent]
+----SET [ModifiedOn] = CURRENT_TIMESTAMP
+----WHERE [ID] IN (SELECT DISTINCT [ID] FROM inserted);
+----GO
+
+
+--USE [ERP]
+--GO
+
+--INSERT INTO [dbo].[tbl_REFERENCES_LOCATION_Continent]
+--           ([ID]
+--           ,[CreatedOn]
+--           ,[CreatedByID]
+--           ,[ModifiedOn]
+--           ,[ModifiedByID]
+--           ,[Name_Ukr]
+--           ,[Name_Ru]
+--           ,[Name_En]
+--           ,[Abbreviation_EN]
+--           ,[Description])
+--     VALUES
+--           (default,--<ID, uniqueidentifier,>
+--           default,--<CreatedOn, datetime,>
+--           default,--<CreatedByID, uniqueidentifier,>
+--           default,--<ModifiedOn, datetime,>
+--           default,--<ModifiedByID, uniqueidentifier,>
+--           NULL,--<Name_Ukr, nvarchar(20),>
+--           NULL,--<Name_Ru, nvarchar(20),>
+--           'Asia',--<Name_En, nvarchar(20),>
+--           'AS',--<Abbreviation_EN, nvarchar(3),>
+--           default--<Description, nvarchar(250),>
+--		   )
+--GO
+
+--USE [ERP]
+--GO
+
+--INSERT INTO [dbo].[tbl_REFERENCES_LOCATION_Continent]
+--           ([ID]
+--           ,[CreatedOn]
+--           ,[CreatedByID]
+--           ,[ModifiedOn]
+--           ,[ModifiedByID]
+--           ,[Name_Ukr]
+--           ,[Name_Ru]
+--           ,[Name_En]
+--           ,[Abbreviation_EN]
+--           ,[Description])
+--     VALUES
+--           (default,--<ID, uniqueidentifier,>
+--           default,--<CreatedOn, datetime,>
+--           default,--<CreatedByID, uniqueidentifier,>
+--           default,--<ModifiedOn, datetime,>
+--           default,--<ModifiedByID, uniqueidentifier,>
+--           NULL,--<Name_Ukr, nvarchar(20),>
+--           NULL,--<Name_Ru, nvarchar(20),>
+--           'Europe',--<Name_En, nvarchar(20),>
+--           'EU',--<Abbreviation_EN, nvarchar(3),>
+--           default--<Description, nvarchar(250),>
+--		   )
+--GO
+--INSERT INTO [dbo].[tbl_REFERENCES_LOCATION_Continent]
+--           ([ID]
+--           ,[CreatedOn]
+--           ,[CreatedByID]
+--           ,[ModifiedOn]
+--           ,[ModifiedByID]
+--           ,[Name_Ukr]
+--           ,[Name_Ru]
+--           ,[Name_En]
+--           ,[Abbreviation_EN]
+--           ,[Description])
+--     VALUES
+--           (default,--<ID, uniqueidentifier,>
+--           default,--<CreatedOn, datetime,>
+--           default,--<CreatedByID, uniqueidentifier,>
+--           default,--<ModifiedOn, datetime,>
+--           default,--<ModifiedByID, uniqueidentifier,>
+--           NULL,--<Name_Ukr, nvarchar(20),>
+--           NULL,--<Name_Ru, nvarchar(20),>
+--           'Africa',--<Name_En, nvarchar(20),>
+--           'AF',--<Abbreviation_EN, nvarchar(3),>
+--           default--<Description, nvarchar(250),>
+--		   )
+--GO
+--INSERT INTO [dbo].[tbl_REFERENCES_LOCATION_Continent]
+--           ([ID]
+--           ,[CreatedOn]
+--           ,[CreatedByID]
+--           ,[ModifiedOn]
+--           ,[ModifiedByID]
+--           ,[Name_Ukr]
+--           ,[Name_Ru]
+--           ,[Name_En]
+--           ,[Abbreviation_EN]
+--           ,[Description])
+--     VALUES
+--           (default,--<ID, uniqueidentifier,>
+--           default,--<CreatedOn, datetime,>
+--           default,--<CreatedByID, uniqueidentifier,>
+--           default,--<ModifiedOn, datetime,>
+--           default,--<ModifiedByID, uniqueidentifier,>
+--           NULL,--<Name_Ukr, nvarchar(20),>
+--           NULL,--<Name_Ru, nvarchar(20),>
+--           'South America',--<Name_En, nvarchar(20),>
+--           'SA',--<Abbreviation_EN, nvarchar(3),>
+--           default--<Description, nvarchar(250),>
+--		   )
+--GO
+--INSERT INTO [dbo].[tbl_REFERENCES_LOCATION_Continent]
+--           ([ID]
+--           ,[CreatedOn]
+--           ,[CreatedByID]
+--           ,[ModifiedOn]
+--           ,[ModifiedByID]
+--           ,[Name_Ukr]
+--           ,[Name_Ru]
+--           ,[Name_En]
+--           ,[Abbreviation_EN]
+--           ,[Description])
+--     VALUES
+--           (default,--<ID, uniqueidentifier,>
+--           default,--<CreatedOn, datetime,>
+--           default,--<CreatedByID, uniqueidentifier,>
+--           default,--<ModifiedOn, datetime,>
+--           default,--<ModifiedByID, uniqueidentifier,>
+--           NULL,--<Name_Ukr, nvarchar(20),>
+--           NULL,--<Name_Ru, nvarchar(20),>
+--           'North America',--<Name_En, nvarchar(20),>
+--           'NA',--<Abbreviation_EN, nvarchar(3),>
+--           default--<Description, nvarchar(250),>
+--		   )
+--GO
+
+
+select * from [tbl_REFERENCES_LOCATION_Continent]
